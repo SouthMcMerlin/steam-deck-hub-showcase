@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Deck Hub | The Ultimate Handheld</title>
+
+  <!-- Modern Font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* COLOR PALETTE EXTRACTED FROM YOUR IMAGE */
+    :root {
+      --bg-dark: #0a0e1a;          /* Deepest cosmic navy background */
+      --card-bg: #131b2e;          /* Dark blue card background */
+      --card-hover: #1c2740;       /* Slightly lighter blue for hover states */
+      --accent-orange: #ff9d00;    /* Vibrant glowing orange */
+      --accent-gradient: linear-gradient(135deg, #ff9d00 0%, #ff5500 100%);
+      --blue-wave: #205c8a;         /* Mid-tone ocean blue */
+      --text-light: #f1f5f9;       /* Bright crisp text */
+      --text-muted: #94a3b8;       /* Subtle muted text */
+      --border-color: rgba(255, 157, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER & NAV */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 8%;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent-orange);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 6rem 8% 4rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 157, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(255, 157, 0, 0.1);
+      color: var(--accent-orange);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    /* GENERAL SECTIONS & GRID */
+    section {
+      padding: 4rem 8%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 4px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* CARD STYLING */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-color);
+      background-color: var(--card-hover);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-gradient);
+      color: #0a0e1a;
+      font-weight: 800;
+      text-decoration: none;
+      border-radius: 8px;
+      text-align: center;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-orange);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 157, 0, 0.1);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 3rem 8%;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.4rem; }
+      header { flex-direction: column; gap: 1rem; }
+      nav a { margin: 0 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION HEADER -->
+  <header>
+    <div class="logo">STEAM DECK <span>HUB</span></div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#resources">Essential Sites</a>
+      <a href="#plugins">Plugins</a>
+      <a href="#community">Community</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main>
+    <section class="hero">
+      <div class="badge">The Ultimate Handheld PC</div>
+      <h1>Power, Portability, & <span>Unlimited Freedom</span></h1>
+      <p>Your guide to mastering SteamOS, tweaking performance, discovering essential plugins, and unlocking the full potential of your device.</p>
+    </section>
+
+    <!-- KEY FEATURES SECTION -->
+    <section id="features">
+      <h2 class="section-title">Why It's Incredible</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Native SteamOS</h3>
+          <p>Powered by Arch Linux, SteamOS brings a console-like user interface directly to a portable form factor with seamless sleep and resume functionality.</p>
+        </div>
+        <div class="card">
+          <h3>Open Ecosystem</h3>
+          <p>It's your PC. Install alternative launchers, run emulators, swap operating systems, or switch to Desktop Mode to handle productivity tasks.</p>
+        </div>
+        <div class="card">
+          <h3>Proton Compatibility</h3>
+          <p>Valve’s Proton compatibility layer lets thousands of Windows games run smoothly right out of the box with zero tweaking required.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESSENTIAL WEBSITES SECTION -->
+    <section id="resources">
+      <h2 class="section-title">Essential Resources</h2>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <h3>ProtonDB</h3>
+            <p>Crowdsourced game compatibility ratings and user-submitted launch options to get tricky games running perfectly.</p>
+          </div>
+          <a href="https://www.protondb.com" target="_blank" class="btn btn-secondary">Visit ProtonDB &rarr;</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>SteamGridDB</h3>
+            <p>Download custom artwork, banners, hero images, and animated icons to personalize your Steam library aesthetics.</p>
+          </div>
+          <a href="https://www.steamgriddb.com" target="_blank" class="btn btn-secondary">Visit SteamGridDB &rarr;</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>Decky Loader Store</h3>
+            <p>The central hub for homebrew plugins designed to extend game-mode functionality and system controls.</p>
+          </div>
+          <a href="https://decky.xyz" target="_blank" class="btn btn-secondary">Visit Decky.xyz &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOMMENDED PLUGINS SECTION -->
+    <section id="plugins">
+      <h2 class="section-title">Must-Have Plugins</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>ProtonDB Badges</h3>
+          <p>Integrates ProtonDB playability badges directly onto your game details pages inside Gaming Mode.</p>
+        </div>
+        <div class="card">
+          <h3>CSS Loader</h3>
+          <p>Apply custom themes, alter system fonts, modify UI colors, and transform the entire look of SteamOS.</p>
+        </div>
+        <div class="card">
+          <h3>PowerTools</h3>
+          <p>Fine-tune hardware settings by adjusting CPU thread counts, toggling SMT, or locking GPU clock speeds for specific games.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY SECTION -->
+    <section id="community">
+      <h2 class="section-title">Join the Community</h2>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <h3>r/SteamDeck</h3>
+            <p>The largest community for news, hardware modifications, game recommendations, and user support.</p>
+          </div>
+          <a href="https://reddit.com/r/SteamDeck" target="_blank" class="btn">Reddit Community &rarr;</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>r/SteamDeckTricks</h3>
+            <p>Dedicated strictly to guides, terminal commands, workflow tips, and hidden features.</p>
+          </div>
+          <a href="https://reddit.com/r/SteamDeckTricks" target="_blank" class="btn">Explore Tricks &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Built for Steam Deck Enthusiasts • Powered by HTML & CSS</p>
+  </footer>
+
+</body>
+</html>
