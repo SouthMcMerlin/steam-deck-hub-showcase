@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steam Deck Hub | The Ultimate Handheld</title>
+  <title>Steam Deck Hub | The Ultimate Handheld PC</title>
 
   <!-- Modern Font from Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
       --blue-wave: #205c8a;         /* Mid-tone ocean blue */
       --text-light: #f1f5f9;       /* Bright crisp text */
       --text-muted: #94a3b8;       /* Subtle muted text */
-      --border-color: rgba(255, 157, 0, 0.2);
+      --border-color: rgba(255, 157, 0, 0.25);
     }
 
     * {
@@ -35,21 +35,24 @@
       background-color: var(--bg-dark);
       color: var(--text-light);
       line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       overflow-x: hidden;
     }
 
-    /* HEADER & NAV */
+    /* HEADER & TAB NAVIGATION */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 8%;
-      background: rgba(10, 14, 26, 0.85);
+      padding: 1.2rem 8%;
+      background: rgba(10, 14, 26, 0.9);
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .logo {
@@ -64,83 +67,68 @@
       -webkit-text-fill-color: transparent;
     }
 
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-left: 2rem;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent-orange);
-    }
-
-    /* HERO SECTION */
-    .hero {
-      padding: 6rem 8% 4rem;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255, 157, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      background: rgba(255, 157, 0, 0.1);
-      color: var(--accent-orange);
-      border: 1px solid var(--border-color);
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(19, 27, 46, 0.6);
+      padding: 0.4rem;
       border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero h1 span {
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
+    .nav-tab {
+      background: transparent;
+      border: none;
       color: var(--text-muted);
-      margin-bottom: 2.5rem;
+      padding: 0.6rem 1.2rem;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    /* GENERAL SECTIONS & GRID */
-    section {
-      padding: 4rem 8%;
-      max-width: 1200px;
-      margin: 0 auto;
+    .nav-tab:hover {
+      color: var(--text-light);
     }
 
+    .nav-tab.active {
+      background: var(--accent-gradient);
+      color: #0a0e1a;
+      font-weight: 800;
+      box-shadow: 0 4px 15px rgba(255, 157, 0, 0.3);
+    }
+
+    /* SLIDE VIEWPORT & PANELS CONTAINER */
+    .viewport {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .tab-slider {
+      display: flex;
+      width: 500%; /* 5 full pages side-by-side */
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .tab-page {
+      width: 20%; /* Each page takes exactly 1/5 of the total width */
+      padding: 3rem 8%;
+      box-sizing: border-box;
+      opacity: 0.3;
+      transition: opacity 0.4s ease;
+    }
+
+    .tab-page.active-page {
+      opacity: 1;
+    }
+
+    /* GENERAL TYPOGRAPHY & ELEMENTS */
     .section-title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       margin-bottom: 2rem;
       position: relative;
@@ -152,25 +140,57 @@
       position: absolute;
       bottom: -8px;
       left: 0;
-      width: 40px;
+      width: 45px;
       height: 4px;
       background: var(--accent-gradient);
       border-radius: 2px;
     }
 
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(255, 157, 0, 0.1);
+      color: var(--accent-orange);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .img-container {
+      width: 100%;
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .img-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto;
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
     }
 
-    /* CARD STYLING */
     .card {
       background-color: var(--card-bg);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 16px;
       padding: 2rem;
-      transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -179,7 +199,6 @@
     .card:hover {
       transform: translateY(-6px);
       border-color: var(--border-color);
-      background-color: var(--card-hover);
     }
 
     .card h3 {
@@ -191,7 +210,7 @@
     .card p {
       color: var(--text-muted);
       font-size: 0.95rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .btn {
@@ -210,146 +229,319 @@
       opacity: 0.9;
     }
 
-    .btn-secondary {
-      background: transparent;
-      color: var(--accent-orange);
-      border: 1px solid var(--border-color);
+    /* SPECIFICATION CARDS SPECIFIC STYLING */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
 
-    .btn-secondary:hover {
-      background: rgba(255, 157, 0, 0.1);
+    .spec-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .spec-card.highlight {
+      border: 2px solid var(--accent-orange);
+      box-shadow: 0 0 25px rgba(255, 157, 0, 0.15);
+    }
+
+    .price {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--text-light);
+      margin: 0.5rem 0;
+    }
+
+    .spec-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .spec-title span {
+      color: #ff4500;
+    }
+
+    .spec-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .spec-list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .spec-list li::before {
+      content: "•";
+      color: var(--accent-orange);
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-right: 0.8rem;
     }
 
     /* FOOTER */
     footer {
       text-align: center;
-      padding: 3rem 8%;
+      padding: 2rem 8%;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       color: var(--text-muted);
       font-size: 0.9rem;
     }
 
     /* RESPONSIVE DESIGN */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.4rem; }
-      header { flex-direction: column; gap: 1rem; }
-      nav a { margin: 0 0.8rem; }
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .tab-page {
+        padding: 2rem 5%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVIGATION HEADER -->
+  <!-- HEADER NAVIGATION WITH TAB BUTTONS -->
   <header>
     <div class="logo">STEAM DECK <span>HUB</span></div>
     <nav>
-      <a href="#features">Features</a>
-      <a href="#resources">Essential Sites</a>
-      <a href="#plugins">Plugins</a>
-      <a href="#community">Community</a>
+      <button class="nav-tab active" onclick="switchTab(0)">Showcase</button>
+      <button class="nav-tab" onclick="switchTab(1)">SteamOS</button>
+      <button class="nav-tab" onclick="switchTab(2)">Why Deck?</button>
+      <button class="nav-tab" onclick="switchTab(3)">Resources</button>
+      <button class="nav-tab" onclick="switchTab(4)">Plugins</button>
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
-  <main>
-    <section class="hero">
-      <div class="badge">The Ultimate Handheld PC</div>
-      <h1>Power, Portability, & <span>Unlimited Freedom</span></h1>
-      <p>Your guide to mastering SteamOS, tweaking performance, discovering essential plugins, and unlocking the full potential of your device.</p>
-    </section>
+  <!-- VIEWPORT CONTAINING SLIDING PAGES -->
+  <div class="viewport">
+    <div class="tab-slider" id="slider">
 
-    <!-- KEY FEATURES SECTION -->
-    <section id="features">
-      <h2 class="section-title">Why It's Incredible</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Native SteamOS</h3>
-          <p>Powered by Arch Linux, SteamOS brings a console-like user interface directly to a portable form factor with seamless sleep and resume functionality.</p>
+      <!-- PAGE 1: HOME SHOWCASE & SPECS -->
+      <div class="tab-page active-page" id="page-0">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+          <div class="badge">The Ultimate Handheld PC</div>
+          <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">Gaming Freedom in Your Hands</h1>
+          <p style="color: var(--text-muted); font-size: 1.15rem;">
+            The Valve Steam Deck brings your favorite PC games to a ultra-portable form factor without sacrificing customizability or power. Take your entire Steam library anywhere you go.
+          </p>
         </div>
-        <div class="card">
-          <h3>Open Ecosystem</h3>
-          <p>It's your PC. Install alternative launchers, run emulators, swap operating systems, or switch to Desktop Mode to handle productivity tasks.</p>
+
+        <!-- HERO HARDWARE SPEC IMAGE PLACEHOLDER -->
+        <div class="img-container">
+          <!-- REPLACE 'image_fb5c1f.png' WITH YOUR SAVED HARDWARE IMAGE FILE -->
+          <img src="image_fb5c1f.png" alt="Steam Deck OLED Specs Image">
         </div>
-        <div class="card">
-          <h3>Proton Compatibility</h3>
-          <p>Valve’s Proton compatibility layer lets thousands of Windows games run smoothly right out of the box with zero tweaking required.</p>
+
+        <h2 class="section-title">OLED Model Comparison</h2>
+        <div class="specs-grid">
+
+          <!-- 512GB OLED SPEC CARD -->
+          <div class="spec-card">
+            <div class="badge">OLED Standard</div>
+            <div class="price">$549.00</div>
+            <div class="spec-title">512GB <span>OLED</span></div>
+            <ul class="spec-list">
+              <li>1280 x 800 HDR OLED Display</li>
+              <li>7.4" Diagonal Display Size</li>
+              <li>Up to 90Hz Refresh Rate</li>
+              <li>Wi-Fi 6E High-Speed Connectivity</li>
+              <li>50Whr Battery (3-12 hours gameplay)</li>
+              <li>45W Power Supply with 2.5m Cable</li>
+              <li>Carrying Case & Steam Profile Bundle</li>
+            </ul>
+          </div>
+
+          <!-- 1TB OLED SPEC CARD -->
+          <div class="spec-card highlight">
+            <div class="badge" style="background: var(--accent-gradient); color: #0a0e1a;">Top Tier</div>
+            <div class="price">$649.00</div>
+            <div class="spec-title">1TB <span>OLED</span> Premium</div>
+            <ul class="spec-list">
+              <li>1280 x 800 HDR OLED Display with Premium Anti-Glare Etched Glass</li>
+              <li>7.4" Diagonal Display Size</li>
+              <li>Up to 90Hz Refresh Rate</li>
+              <li>Wi-Fi 6E High-Speed Connectivity</li>
+              <li>50Whr Battery (3-12 hours gameplay)</li>
+              <li>45W Power Supply with 2.5m Cable</li>
+              <li>Exclusive Carrying Case with Removable Liner</li>
+              <li>Exclusive Startup Movie & Virtual Keyboard Theme</li>
+            </ul>
+          </div>
+
         </div>
       </div>
-    </section>
 
-    <!-- ESSENTIAL WEBSITES SECTION -->
-    <section id="resources">
-      <h2 class="section-title">Essential Resources</h2>
-      <div class="grid">
-        <div class="card">
-          <div>
+      <!-- PAGE 2: STEAM OS OVERVIEW -->
+      <div class="tab-page" id="page-1">
+        <h2 class="section-title">Powered by SteamOS</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem; max-width: 800px;">
+          Built on Arch Linux, SteamOS offers an intuitive, console-like gaming experience tailored specifically for portable play, combined with the unrestricted freedom of a full desktop computer.
+        </p>
+
+        <!-- STEAMOS IMAGE PLACEHOLDER -->
+        <div class="img-container">
+          <!-- REPLACE 'image_fb4df2.png' WITH YOUR SAVED STEAOMS BANNER IMAGE FILE -->
+          <img src="image_fb4df2.png" alt="SteamOS Banner Image">
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Instant Suspend & Resume</h3>
+            <p>Press the power button at any point during your game to pause the action and put the device into low-power sleep mode. Tap it again to pick up immediately where you left off.</p>
+          </div>
+          <div class="card">
+            <h3>Desktop Mode</h3>
+            <p>Switch over to the KDE Plasma Desktop with a single press to browse the web, install Linux applications, or manage your files like a traditional PC.</p>
+          </div>
+          <div class="card">
+            <h3>Seamless Cloud Saves</h3>
+            <p>Start a session on your home PC, pick up your Steam Deck on the go, and continue playing right where your save left off with automatic Steam Cloud Sync.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 3: WHY IT'S INCREDIBLE -->
+      <div class="tab-page" id="page-2">
+        <h2 class="section-title">Why It's Incredible</h2>
+        <div class="grid" style="margin-top: 1rem;">
+          <div class="card">
+            <h3>Trackpad Precision</h3>
+            <p>Dual capacitive trackpads allow you to play cursor-heavy games like strategy titles, CRPGs, and mouse-based puzzle games with high accuracy.</p>
+          </div>
+          <div class="card">
+            <h3>Complete Control Mapping</h3>
+            <p>Remap every button, trigger, and gyro control with Valve's Steam Input, or download community controller layouts created by other players.</p>
+          </div>
+          <div class="card">
+            <h3>Open Ecosystem</h3>
+            <p>No paywalls for online play. Install alternative storefronts like Heroic Games Launcher, run retro emulators, or dual-boot alternative OS options freely.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 4: ESSENTIAL RESOURCES & PROTON -->
+      <div class="tab-page" id="page-3">
+        <h2 class="section-title">Essential Resources</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Check compatibility and customize your games with community tools.</p>
+
+        <!-- PROTON XDA OVERLAY IMAGE PLACEHOLDER -->
+        <div class="img-container">
+          <!-- REPLACE 'image_fb583e.png' WITH YOUR SAVED PROTON OVERLAY IMAGE FILE -->
+          <img src="image_fb583e.png" alt="Proton Banner Graphic">
+        </div>
+
+        <!-- PROTONDB DIAGRAM IMAGE PLACEHOLDER -->
+        <div class="img-container">
+          <!-- REPLACE 'image_fb58ba.png' WITH YOUR SAVED PROTONDB DASHBOARD IMAGE FILE -->
+          <img src="image_fb58ba.png" alt="ProtonDB Compatibility Breakdown Graphic">
+        </div>
+
+        <div class="grid">
+          <div class="card">
             <h3>ProtonDB</h3>
-            <p>Crowdsourced game compatibility ratings and user-submitted launch options to get tricky games running perfectly.</p>
+            <p>The crowdsourced hub for Linux game performance. Check user feedback and custom tweaks for games before you buy or download.</p>
+            <a href="https://www.protondb.com" target="_blank" class="btn">Visit ProtonDB &rarr;</a>
           </div>
-          <a href="https://www.protondb.com" target="_blank" class="btn btn-secondary">Visit ProtonDB &rarr;</a>
-        </div>
-        <div class="card">
-          <div>
+          <div class="card">
             <h3>SteamGridDB</h3>
-            <p>Download custom artwork, banners, hero images, and animated icons to personalize your Steam library aesthetics.</p>
+            <p>Customize your library artwork with tens of thousands of custom grid images, hero banners, and animated covers.</p>
+            <a href="https://www.steamgriddb.com" target="_blank" class="btn">Visit SteamGridDB &rarr;</a>
           </div>
-          <a href="https://www.steamgriddb.com" target="_blank" class="btn btn-secondary">Visit SteamGridDB &rarr;</a>
-        </div>
-        <div class="card">
-          <div>
-            <h3>Decky Loader Store</h3>
-            <p>The central hub for homebrew plugins designed to extend game-mode functionality and system controls.</p>
-          </div>
-          <a href="https://decky.xyz" target="_blank" class="btn btn-secondary">Visit Decky.xyz &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- RECOMMENDED PLUGINS SECTION -->
-    <section id="plugins">
-      <h2 class="section-title">Must-Have Plugins</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>ProtonDB Badges</h3>
-          <p>Integrates ProtonDB playability badges directly onto your game details pages inside Gaming Mode.</p>
-        </div>
-        <div class="card">
-          <h3>CSS Loader</h3>
-          <p>Apply custom themes, alter system fonts, modify UI colors, and transform the entire look of SteamOS.</p>
-        </div>
-        <div class="card">
-          <h3>PowerTools</h3>
-          <p>Fine-tune hardware settings by adjusting CPU thread counts, toggling SMT, or locking GPU clock speeds for specific games.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMMUNITY SECTION -->
-    <section id="community">
-      <h2 class="section-title">Join the Community</h2>
-      <div class="grid">
-        <div class="card">
-          <div>
+          <div class="card">
             <h3>r/SteamDeck</h3>
-            <p>The largest community for news, hardware modifications, game recommendations, and user support.</p>
+            <p>Join the official Reddit community for guides, troubleshooting, setup showcases, and software updates.</p>
+            <a href="https://reddit.com/r/SteamDeck" target="_blank" class="btn">Reddit Community &rarr;</a>
           </div>
-          <a href="https://reddit.com/r/SteamDeck" target="_blank" class="btn">Reddit Community &rarr;</a>
-        </div>
-        <div class="card">
-          <div>
-            <h3>r/SteamDeckTricks</h3>
-            <p>Dedicated strictly to guides, terminal commands, workflow tips, and hidden features.</p>
-          </div>
-          <a href="https://reddit.com/r/SteamDeckTricks" target="_blank" class="btn">Explore Tricks &rarr;</a>
         </div>
       </div>
-    </section>
-  </main>
+
+      <!-- PAGE 5: MUST-HAVE PLUGINS -->
+      <div class="tab-page" id="page-4">
+        <h2 class="section-title">Must-Have Plugins</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Unlock deep customization and system control using Decky Loader.</p>
+
+        <!-- DECKY LOADER FEATURE BREAKDOWN IMAGE PLACEHOLDER -->
+        <div class="img-container">
+          <!-- REPLACE 'image_fb54fd.png' WITH YOUR SAVED DECKY OVERVIEW IMAGE FILE -->
+          <img src="image_fb54fd.png" alt="Decky Loader Overview Graphic">
+        </div>
+
+        <!-- DECKY IN-GAME MENU IMAGE PLACEHOLDER -->
+        <div class="img-container">
+          <!-- REPLACE 'image_fb54db.png' WITH YOUR SAVED DECKY QUICK ACCESS MENU IMAGE FILE -->
+          <img src="image_fb54db.png" alt="Decky Loader Quick Access Menu Interface">
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>CSS Loader</h3>
+            <p>Apply custom themes directly to SteamOS. Change background colors, alter system fonts, and redesign the entire UI interface.</p>
+          </div>
+          <div class="card">
+            <h3>ProtonDB Badges</h3>
+            <p>Displays official ProtonDB rating badges right inside your game detail screens so you know compatibility instantly.</p>
+          </div>
+          <div class="card">
+            <h3>PowerTools</h3>
+            <p>Adjust processor thread counts, toggle SMT, or set fixed GPU frequencies to maximize battery life or bump performance.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer>
-    <p>Built for Steam Deck Enthusiasts • Powered by HTML & CSS</p>
+    <p>Built for Steam Deck Enthusiasts • HTML, CSS & JavaScript</p>
   </footer>
 
+  <!-- SLIDE TRANSITION SCRIPT -->
+  <script>
+    function switchTab(index) {
+      // Shift the slider container horizontally
+      const slider = document.getElementById('slider');
+      slider.style.transform = `translateX(-${index * 20}%)`;
+
+      // Update Active Navigation Tab Styling
+      const tabs = document.querySelectorAll('.nav-tab');
+      tabs.forEach((tab, idx) => {
+        if (idx === index) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+
+      // Update Page Opacity States
+      const pages = document.querySelectorAll('.tab-page');
+      pages.forEach((page, idx) => {
+        if (idx === index) {
+          page.classList.add('active-page');
+        } else {
+          page.classList.remove('active-page');
+        }
+      });
+
+      // Scroll to top of viewport on tab change
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
