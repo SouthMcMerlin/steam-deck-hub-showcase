@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Steam Deck Hub | The Ultimate Handheld PC</title>
-
+  
   <!-- Modern Font from Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,7 +115,7 @@
     }
 
     .tab-page {
-      width: 20%; /* Each page takes exactly 1/5 of the total width */
+      width: 20%; /* Each page takes exactly 1/5 of total width */
       padding: 3rem 8%;
       box-sizing: border-box;
       opacity: 0.3;
@@ -160,21 +160,29 @@
       letter-spacing: 1px;
     }
 
+    /* LARGER IMAGE CONTAINERS */
     .img-container {
       width: 100%;
+      max-width: 1000px; /* Significantly increased max-width */
       background-color: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 1.2rem;
       text-align: center;
-      margin-bottom: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin: 0 auto 2.5rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .img-container:hover {
+      border-color: var(--border-color);
+      transform: translateY(-4px);
     }
 
     .img-container img {
-      max-width: 100%;
+      width: 100%;
       height: auto;
-      border-radius: 10px;
+      border-radius: 12px;
       display: block;
       margin: 0 auto;
     }
@@ -311,6 +319,9 @@
       .tab-page {
         padding: 2rem 5%;
       }
+      .img-container {
+        padding: 0.6rem;
+      }
     }
   </style>
 </head>
@@ -338,19 +349,18 @@
           <div class="badge">The Ultimate Handheld PC</div>
           <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">Gaming Freedom in Your Hands</h1>
           <p style="color: var(--text-muted); font-size: 1.15rem;">
-            The Valve Steam Deck brings your favorite PC games to a ultra-portable form factor without sacrificing customizability or power. Take your entire Steam library anywhere you go.
+            The Valve Steam Deck brings your favorite PC games to an ultra-portable form factor without sacrificing customizability or power. Take your entire Steam library anywhere you go.
           </p>
         </div>
 
-        <!-- HERO HARDWARE SPEC IMAGE PLACEHOLDER -->
+        <!-- HERO HARDWARE SPEC IMAGE (EXPANDED) -->
         <div class="img-container">
-          <!-- REPLACE 'image_fb5c1f.png' WITH YOUR SAVED HARDWARE IMAGE FILE -->
           <img src="image_fb5c1f.png" alt="Steam Deck OLED Specs Image">
         </div>
 
         <h2 class="section-title">OLED Model Comparison</h2>
         <div class="specs-grid">
-
+          
           <!-- 512GB OLED SPEC CARD -->
           <div class="spec-card">
             <div class="badge">OLED Standard</div>
@@ -394,9 +404,8 @@
           Built on Arch Linux, SteamOS offers an intuitive, console-like gaming experience tailored specifically for portable play, combined with the unrestricted freedom of a full desktop computer.
         </p>
 
-        <!-- STEAMOS IMAGE PLACEHOLDER -->
+        <!-- STEAMOS IMAGE (EXPANDED) -->
         <div class="img-container">
-          <!-- REPLACE 'image_fb4df2.png' WITH YOUR SAVED STEAOMS BANNER IMAGE FILE -->
           <img src="image_fb4df2.png" alt="SteamOS Banner Image">
         </div>
 
@@ -440,16 +449,9 @@
         <h2 class="section-title">Essential Resources</h2>
         <p style="color: var(--text-muted); margin-bottom: 2rem;">Check compatibility and customize your games with community tools.</p>
 
-        <!-- PROTON XDA OVERLAY IMAGE PLACEHOLDER -->
+        <!-- PROTON GRAPHIC (EXPANDED) -->
         <div class="img-container">
-          <!-- REPLACE 'image_fb583e.png' WITH YOUR SAVED PROTON OVERLAY IMAGE FILE -->
           <img src="image_fb583e.png" alt="Proton Banner Graphic">
-        </div>
-
-        <!-- PROTONDB DIAGRAM IMAGE PLACEHOLDER -->
-        <div class="img-container">
-          <!-- REPLACE 'image_fb58ba.png' WITH YOUR SAVED PROTONDB DASHBOARD IMAGE FILE -->
-          <img src="image_fb58ba.png" alt="ProtonDB Compatibility Breakdown Graphic">
         </div>
 
         <div class="grid">
@@ -476,15 +478,13 @@
         <h2 class="section-title">Must-Have Plugins</h2>
         <p style="color: var(--text-muted); margin-bottom: 2rem;">Unlock deep customization and system control using Decky Loader.</p>
 
-        <!-- DECKY LOADER FEATURE BREAKDOWN IMAGE PLACEHOLDER -->
+        <!-- DECKY LOADER OVERVIEW GRAPHIC (EXPANDED) -->
         <div class="img-container">
-          <!-- REPLACE 'image_fb54fd.png' WITH YOUR SAVED DECKY OVERVIEW IMAGE FILE -->
           <img src="image_fb54fd.png" alt="Decky Loader Overview Graphic">
         </div>
 
-        <!-- DECKY IN-GAME MENU IMAGE PLACEHOLDER -->
+        <!-- DECKY IN-GAME MENU GRAPHIC (EXPANDED) -->
         <div class="img-container">
-          <!-- REPLACE 'image_fb54db.png' WITH YOUR SAVED DECKY QUICK ACCESS MENU IMAGE FILE -->
           <img src="image_fb54db.png" alt="Decky Loader Quick Access Menu Interface">
         </div>
 
@@ -515,11 +515,9 @@
   <!-- SLIDE TRANSITION SCRIPT -->
   <script>
     function switchTab(index) {
-      // Shift the slider container horizontally
       const slider = document.getElementById('slider');
       slider.style.transform = `translateX(-${index * 20}%)`;
 
-      // Update Active Navigation Tab Styling
       const tabs = document.querySelectorAll('.nav-tab');
       tabs.forEach((tab, idx) => {
         if (idx === index) {
@@ -529,7 +527,6 @@
         }
       });
 
-      // Update Page Opacity States
       const pages = document.querySelectorAll('.tab-page');
       pages.forEach((page, idx) => {
         if (idx === index) {
@@ -539,7 +536,6 @@
         }
       });
 
-      // Scroll to top of viewport on tab change
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
